@@ -1,0 +1,29 @@
+{
+  "name": "vineyard",
+  "version": "1.0.0",
+  "description": "A searchable archive of videos from Vine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tycrek/vineyard.git"
+  },
+  "keywords": [
+    "vine",
+    "archive"
+  ],
+  "author": "tycrek",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/tycrek/vineyard/issues"
+  },
+  "homepage": "https://github.com/tycrek/vineyard#readme",
+  "dependencies": {
+    "browserify": "^16.5.0",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "node-sass": "^4.12.0"
+  }
+}
