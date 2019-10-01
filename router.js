@@ -25,3 +25,5 @@ Router.get('/css', (_req, res) => {
 	let css = Frontend.css();
 	respond(res, css, 'css');
 });
+
+module.exports = Router;

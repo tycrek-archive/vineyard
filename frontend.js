@@ -45,7 +45,7 @@ exports.css = () => {
 	function readFiles(files) {
 		return new Promise((resolve, reject) => {
 			files.forEach((file) => {
-				let filepath = Utils.path(file);
+				let filepath = Utils.path(`/client/scss/${file}`);
 				fs.readFile(filepath)
 					.then((bytes) => bytes.toString())
 					.then((data) => scss.push(data))
