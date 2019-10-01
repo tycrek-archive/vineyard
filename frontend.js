@@ -33,11 +33,11 @@ exports.css = () => {
 		fs.readdir(Utils.path('/client/scss/'))
 			.then((files) => {
 				total = files.length;
-				readFiles(files);
+				return readFiles(files);
 			})
-			.then(() => scss.join('\n'))
+			.then(() => scss.join())
 			.then((fullScss) => {
-				sass.render({ data: fullScss }, resolve);
+				sass.render({ data: fullScss }, resolve(fullScss));
 			})
 			.catch((err) => reject(err));
 	});
