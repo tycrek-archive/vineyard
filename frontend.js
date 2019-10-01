@@ -62,5 +62,5 @@ exports.testIndex = () => {
 			.then((bytes) => bytes.toString())
 			.then((data) => resolve(data))
 			.catch((err) => reject(err));
-	})
+	});
 }

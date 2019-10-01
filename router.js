@@ -29,9 +29,15 @@ Router.get('/css', (_req, res) => {
 	Frontend.css().then((css) => respond(res, css, 'css'));
 });
 
-Router.get('/getVine/:min', (req, res) => {
+Router.get('/getRandomVine/:min', (req, res) => {
 	let min = req.params.min;
-	Psql.getVine(min)
+	Psql.getRandomVine(min)
+		.then((vine) => respond(res, vine, 'json'));
+});
+
+Router.get('/getVine/:vineId', (req, res) => {
+	let vineId = req.params.vineId;
+	Psql.getVine(vineId)
 		.then((vine) => respond(res, vine, 'json'));
 });
 
