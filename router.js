@@ -35,4 +35,8 @@ Router.get('/getVine/:min', (req, res) => {
 		.then((vine) => respond(res, vine, 'json'));
 });
 
+Router.get('/v/*', (req, res) => {
+	Frontend.testIndex().then((html) => respond(res, html));
+});
+
 module.exports = Router;
