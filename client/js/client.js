@@ -8,16 +8,33 @@ $(window).on('load', () => {
 		if (video.get(0).paused) video.get(0).play();
 		else video.get(0).pause();
 	});
+
+	// Check if parameters exist
+	let path = window.location.pathname;
+	if (path.startsWith('/v/')) {
+		let split = path.split('/');
+		let vineId = split[split.length - 1];
+		fetch(`/getVine/${vineId}`)
+			.then((res) => res.json())
+			.then((json) => loadVideo(json.videourl));
+	}
 });
 
 window.random = () => {
 	let min = $('#min').val();
 	min = min === '' ? 0 : min;
-	fetch(`/getVine/${min}`)
+	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
-			$('#video').attr('src', json.videourl);
-			//$('#video').load();
-			window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
+			window.location = `/v/${json.vineid}`;
+			//loadVideo(json.videourl);
+			//window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
 		});
+}
+
+function loadVideo(videoUrl) {
+	let video = $('#video')[0];
+	video.src = videoUrl;
+	video.load();
+	video.play();
 }
