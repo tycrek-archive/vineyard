@@ -1,5 +1,6 @@
 var Router = require('express').Router();
 var Frontend = require('./frontend.js');
+var Psql = require('./psql');
 
 function respond(res, payload, type = 'html', status = 200) {
 	res.status(status);
@@ -26,6 +27,12 @@ Router.get('/js', (req, res) => {
 
 Router.get('/css', (_req, res) => {
 	Frontend.css().then((css) => respond(res, css, 'css'));
+});
+
+Router.get('/getVine/:min', (req, res) => {
+	let min = req.params.min;
+	Psql.getVine(min)
+		.then((vine) => respond(res, vine, 'json'));
 });
 
 module.exports = Router;
