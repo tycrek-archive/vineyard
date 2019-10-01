@@ -17,6 +17,7 @@ window.random = () => {
 		.then((res) => res.json())
 		.then((json) => {
 			$('#video').attr('src', json.videourl);
-			$('#video').load();
+			//$('#video').load();
+			window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
 		});
 }
