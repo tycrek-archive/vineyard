@@ -16,7 +16,11 @@ Router.use((req, res, next) => {
 	next();
 });
 
-Router.get('/js', (_req, res) => {
+Router.get('/', (req, res) => {
+	Frontend.testIndex().then((html) => respond(res, html));
+});
+
+Router.get('/js', (req, res) => {
 	Frontend.js().then((js) => respond(res, js, 'js'));
 });
 

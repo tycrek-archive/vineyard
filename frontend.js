@@ -55,3 +55,12 @@ exports.css = () => {
 		});
 	}
 }
+
+exports.testIndex = () => {
+	return new Promise((resolve, reject) => {
+		fs.readFile(Utils.path('/client/html/test_index.mustache'))
+			.then((bytes) => bytes.toString())
+			.then((data) => resolve(data))
+			.catch((err) => reject(err));
+	})
+}
