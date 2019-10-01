@@ -18,7 +18,7 @@ exports.js = () => {
 			.then(() => {
 				browserify.bundle((err, buf) => {
 					if (err) reject(err);
-					else resolve(buf.toString);
+					else resolve(buf.toString());
 				});
 			})
 			.catch((err) => reject(err));

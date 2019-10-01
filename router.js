@@ -17,8 +17,7 @@ Router.use((req, res, next) => {
 });
 
 Router.get('/js', (_req, res) => {
-	let js = Frontend.js();
-	respond(res, js, 'js');
+	Frontend.js().then((js) => respond(res, js, 'js'));
 });
 
 Router.get('/css', (_req, res) => {
