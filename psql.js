@@ -29,3 +29,20 @@ exports.getVine = (vineId) => {
 			.catch((err) => reject(err));
 	});
 }
+
+exports.getFromTags = (tags) => {
+	let q = {
+		text: `
+			SELECT *
+			FROM vines
+			WHERE $1 <@ tags
+			ORDER BY loops DESC;
+		`,
+		values: [tags]
+	};
+	return new Promise((resolve, reject) => {
+		pool.query(q)
+			.then((result) => resolve(result.rows))
+			.catch((err) => reject(err));
+	});
+}
