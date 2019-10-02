@@ -1,8 +1,9 @@
 const { Pool } = require('pg');
 var fs = require('fs-extra');
+var Utils = require('./utils');
 
 var pool = new Pool({
-	connectionString: fs.readJsonSync('auth.json').psql
+	connectionString: fs.readJsonSync(Utils.path('auth.json')).psql
 });
 
 exports.getRandomVine = (min) => {
