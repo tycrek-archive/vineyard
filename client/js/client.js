@@ -8,16 +8,7 @@ $(window).on('load', () => {
 		if (video.get(0).paused) video.get(0).play();
 		else video.get(0).pause();
 	});
-
-	// Check if parameters exist
-	let path = window.location.pathname;
-	if (path.startsWith('/v/')) {
-		let split = path.split('/');
-		let vineId = split[split.length - 1];
-		fetch(`/getVine/${vineId}`)
-			.then((res) => res.json())
-			.then((json) => loadVideo(json.videourl));
-	}
+	loadFromAddressBar();
 });
 
 window.random = () => {
@@ -26,9 +17,8 @@ window.random = () => {
 	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
-			window.location = `/v/${json.vineid}`;
-			//loadVideo(json.videourl);
-			//window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
+			loadVideo(json.videourl);
+			window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
 		});
 }
 
@@ -37,4 +27,19 @@ function loadVideo(videoUrl) {
 	video.src = videoUrl;
 	video.load();
 	video.play();
+}
+
+function loadFromAddressBar() {
+	let path = window.location.pathname;
+	if (path.startsWith('/v/')) {
+		let split = path.split('/');
+		let vineId = split[split.length - 1];
+		fetch(`/getVine/${vineId}`)
+			.then((res) => res.json())
+			.then((json) => loadVideo(json.videourl));
+	}
+}
+
+window.onpopstate = (event) => {
+	loadFromAddressBar();
 }
