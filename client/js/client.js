@@ -11,9 +11,12 @@ $(window).on('load', () => {
 	loadFromAddressBar();
 });
 
+window.onpopstate = (_event) => loadFromAddressBar();
+
 window.random = () => {
 	let min = $('#min').val();
 	min = min === '' ? 0 : min;
+	unloadVideo();
 	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
@@ -30,6 +33,7 @@ function loadVideo(videoUrl) {
 }
 
 function loadFromAddressBar() {
+	unloadVideo();
 	let path = window.location.pathname;
 	if (path.startsWith('/v/')) {
 		let split = path.split('/');
@@ -40,6 +44,7 @@ function loadFromAddressBar() {
 	}
 }
 
-window.onpopstate = (event) => {
-	loadFromAddressBar();
+function unloadVideo() {
+	let video = $('#video')[0];
+	video.src = '';
 }
