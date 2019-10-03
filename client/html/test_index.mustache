@@ -4,16 +4,56 @@
 		<title>Vineyard</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript" src="/js"></script>
+		<script src="https://kit.fontawesome.com/f2f926ac2d.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="/css">
+		<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/lobster" type="text/css" />
 	</head>
 	<body>
 		<div id="header">
-			<h1>Vineyard</h1>
+			<text id="title">Vineyard</text>
 		</div>
 		<div id="content">
 			<center>
 
-				<video id="video" autoplay loop poster="https://3.bp.blogspot.com/-MCCUr1CekTE/VPz4EEqAA1I/AAAAAAAANeA/anbL5xVJ2q4/s1600/11-03%2B~%2BGIF%2B~%2BPlease%2BWait.gif" src=""></video>
+				<div id="media-player">
+					<table>
+						<tr>
+							<td>
+								<i class="fad fa-user"></i>
+								<text id="username"></text>
+							</td>
+							<td>
+								<i class="fad fa-clock fa-swap-opacity"></i>
+								<text id="created"></text>
+							</td>
+						</tr>
+					</table>
+
+					<text id="description"></text>
+
+					<video id="video" autoplay loop poster="https://3.bp.blogspot.com/-MCCUr1CekTE/VPz4EEqAA1I/AAAAAAAANeA/anbL5xVJ2q4/s1600/11-03%2B~%2BGIF%2B~%2BPlease%2BWait.gif" src=""></video>
+
+					<table>
+						<tr>
+							<td>
+								<i class="fad fa-repeat"></i>
+								<text id="loops">...</text>
+							</td>
+							<td>
+								<i class="fad fa-heart"></i>
+								<text id="likes">...</text>
+							</td>
+							<td>
+								<i class="fad fa-comments"></i>
+								<text id="comments">...</text>
+							</td>
+							<td>
+								<i class="fad fa-share"></i>
+								<text id="reposts">...</text>
+							</td>
+						</tr>
+					</table>
+				</div>
 
 				<br>
 				Min views: <input id="min" type="number" value="10000000"><br>
