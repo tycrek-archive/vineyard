@@ -110,6 +110,17 @@ function loadVine(vine) {
 	loadVideo(videoUrl);
 }
 
+function loadUser(vines) {
+	vines.forEach((vine) => {
+		let id = vine.vineid;
+		let jid = `#${id}`;
+		let html = `<video class="video grid" loop id=${id} poster="${vine.thumbnailurl}"></video>`;
+		$('#videos').append(html);
+
+		loadVideo(vine.videourl, jid);
+	});
+}
+
 function entityLink(entity, original) {
 	return `<a href="/u/${entity.idStr}">${original}</a>`;
 }
