@@ -60,7 +60,13 @@ body {
 	}
 }
 
-a:link, a:visited, a:hover, a:active {
+a {
 	color: $vine-green;
 	text-decoration: none;
+	&:hover {
+		color: $vine-dark;
+	}
+	&:active {
+		text-decoration: underline;
+	}
 }
