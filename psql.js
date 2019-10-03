@@ -46,3 +46,15 @@ exports.getFromTags = (tags) => {
 			.catch((err) => reject(err));
 	});
 }
+
+exports.getUser = (userIdStr) => {
+	let q = {
+		text: 'SELECT * FROM vines WHERE useridstr = $1 ORDER BY created DESC',
+		values: [userIdStr]
+	};
+	return new Promise((resolve, reject) => {
+		pool.query(q)
+			.then((result) => resolve(result.rows))
+			.catch((err) => reject(err));
+	})
+}

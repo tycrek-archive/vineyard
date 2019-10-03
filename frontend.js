@@ -67,3 +67,40 @@ exports.testIndex = () => {
 			.catch((err) => reject(err));
 	});
 }
+
+exports.dom = (page) => {
+	// Define filepath
+	let headerPath = Utils.path('/client/html/header.html');
+	let pagePath = Utils.path(`/client/html/${page}.html`);
+	let footerPath = Utils.path('/client/html/footer.html');
+
+	return new Promise((resolve, reject) => {
+		let html = [];
+
+		fs.readFile(headerPath)
+			.then((bytes) => bytes.toString())
+			.then((data) => html.push(data))
+
+			.then(() => fs.readFile(pagePath))
+			.then((bytes) => bytes.toString())
+			.then((data) => html.push(data))
+
+			.then(() => fs.readFile(footerPath))
+			.then((bytes) => bytes.toString())
+			.then((data) => html.push(data))
+
+			.then(() => html.join('\n'))
+			.then((dom) => resolve(dom))
+			.catch((err) => reject(err));
+	});
+}
+
+exports.page = (page) => {
+	let pagePath = Utils.path(`/client/html/${page}.html`);
+	return new Promise((resolve, reject) => {
+		fs.readFile(pagePath)
+			.then((bytes) => bytes.toString())
+			.then((data) => resolve(data))
+			.catch((err) => reject(err));
+	});
+}

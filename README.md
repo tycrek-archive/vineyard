@@ -6,5 +6,7 @@ The latest stable-ish live version is available at [vineyard.jmoore.dev](https:/
 ### To-do
 
 - [x] Proper JavaScript history
+- [ ] Pages
+- [ ] Error handling
 - [ ] Tagging
 - [ ] Searching
