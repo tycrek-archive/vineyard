@@ -28,8 +28,10 @@ function loadVideo(url) {
 function unloadVideo() {
 	$('.meta-data').html('');
 	$('.fa-question').show();
-	let video = $('#video')[0];
-	video.src = '';
+	try {
+		let video = $('#video')[0];
+		video.src = '';
+	} catch { }
 }
 
 //// Vine loading and metadata manipulation ////
