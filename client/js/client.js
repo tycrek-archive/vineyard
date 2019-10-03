@@ -111,10 +111,7 @@ function loadVine(vine) {
 }
 
 function entityLink(entity, original) {
-	//let id = entity.vanityUrls.length === 0 ? entity.title : entity.vanityUrls[0];
-	let link =
-		`<a href="/u/${entity.idStr}">${original}</a>`;
-	return link;
+	return `<a href="/u/${entity.idStr}">${original}</a>`;
 }
 
 function nFormatter(num, digits) {
