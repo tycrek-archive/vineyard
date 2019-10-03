@@ -46,14 +46,24 @@ function loadVideo(vine) {
 
 	// Tags
 	let description = vine.description;
+	let originals = [];
+	let replacements = [];
+
 	vine.entities.forEach((entity) => {
 		entity = JSON.parse(entity);
 		if (entity.type !== 'mention') return;
 		let range = entity.range;
-		let toReplace = description.substring(range[0], range[1]);
-		let newTag = entityLink(entity, toReplace);
-		description = description.replace(toReplace, newTag);
+		let original = description.substring(range[0], range[1] + 1);
+		let replacement = entityLink(entity, original);
+		originals.push(original);
+		replacements.push(replacement);
 	});
+
+	for (let index = 0; index < originals.length; index++) {
+		let original = originals[index];
+		let replacement = replacements[index];
+		description = description.replace(original, replacement);
+	}
 
 	// Insert social data
 	$('#username').html(link);
