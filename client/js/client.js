@@ -17,9 +17,11 @@ function loadVideo(url, id = '#video') {
 	video.unbind();
 
 	video[0].src = url;
-	video[0].load();
 
-	if (id === '#video') video[0].play();
+	if (id === '#video') {
+		video[0].load();
+		video[0].play();
+	}
 
 	video.on('click', () => {
 		if (id !== '#video') return window.location = `/v/${id.replace('#', '')}`;
@@ -53,7 +55,9 @@ function getRandomVine() {
 	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
-			window.location = `/v/${json.vineid}`;
+			//window.location = `/v/${json.vineid}`;
+			window.history.pushState(null, null, `/v/${json.vineid}`);
+			loadVine(json);
 		});
 }
 
@@ -128,7 +132,7 @@ function loadUser(vines) {
 	vines.forEach((vine) => {
 		let id = vine.vineid;
 		let jid = `#${id}`;
-		let html = `<video class="video grid" loop id=${id} poster="${vine.thumbnailurl}"></video>`;
+		let html = `<video preload="none" class="video grid" loop id=${id} poster="${vine.thumbnailurl}"></video>`;
 		$('#videos').append(html);
 
 		loadVideo(vine.videourl, jid);
