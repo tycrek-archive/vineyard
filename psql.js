@@ -56,5 +56,18 @@ exports.getUser = (userIdStr) => {
 		pool.query(q)
 			.then((result) => resolve(result.rows))
 			.catch((err) => reject(err));
-	})
+	});
+}
+
+exports.search = (search) => {
+	let terms = search.split(' ').join('%');
+	let q = {
+		text: 'SELECT * FROM vines WHERE LOWER(description) LIKE LOWER($1);',
+		values: [terms]
+	};
+	return new Promise((resolve, reject) => {
+		pool.query(q)
+			.then((result) => resolve(result.row))
+			.catch((err) => reject(err));
+	});
 }
