@@ -31,6 +31,8 @@ function loadVideo(vine) {
 
 	// Select username or a vanity URL
 	let name = vine.vanityurls.length === 0 ? vine.username : vine.vanityurls[0];
+	let link =
+		`<a href="/u/${name}">${vine.username}</a>`
 
 	// Format the timestamp
 	let date = moment(vine.created).format('MMM Do, YYYY');
@@ -54,7 +56,7 @@ function loadVideo(vine) {
 	});
 
 	// Insert social data
-	$('#username').html(name);
+	$('#username').html(link);
 	$('#created').html(date);
 	$('#loops').html(loops);
 	$('#likes').html(likes);
