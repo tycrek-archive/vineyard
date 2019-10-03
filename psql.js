@@ -49,7 +49,7 @@ exports.getFromTags = (tags) => {
 
 exports.getUser = (userIdStr) => {
 	let q = {
-		text: 'SELECT * FROM vines WHERE useridstr = $1',
+		text: 'SELECT * FROM vines WHERE useridstr = $1 ORDER BY created DESC',
 		values: [userIdStr]
 	};
 	return new Promise((resolve, reject) => {
