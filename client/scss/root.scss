@@ -68,3 +68,14 @@ a {
 		color: $vine-dark;
 	}
 }
+
+#videos {
+	display: block;
+
+	video {
+		max-width: 180px;
+		margin: 8px;
+		border: 1px solid grey;
+		border-radius: 3px;
+	}
+}
