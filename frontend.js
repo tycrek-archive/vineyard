@@ -94,3 +94,13 @@ exports.dom = (page) => {
 			.catch((err) => reject(err));
 	});
 }
+
+exports.page = (page) => {
+	let pagePath = Utils.path(`/client/html/${page}.html`);
+	return new Promise((resolve, reject) => {
+		fs.readFile(pagePath)
+			.then((bytes) => bytes.toString())
+			.then((data) => resolve(data))
+			.catch((err) => reject(err));
+	});
+}
