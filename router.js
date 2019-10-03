@@ -48,6 +48,14 @@ Router.get('/getVine/:vineId', (req, res) => {
 		.then((vine) => respond(res, vine, 'json'));
 });
 
+// Return a users vines
+Router.get('/getUser/:userIdStr', (req, res) => {
+	let userIdStr = req.params.userIdStr;
+	Psql.getUser(userIdStr)
+		.then((vines) => respond(res, vines, 'json'));
+});
+
+
 //// Pages (Full loads) ////
 Router.get('/', (_req, res) => {
 	Frontend.dom('index')
