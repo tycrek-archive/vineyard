@@ -11,11 +11,27 @@ window.random = () => getRandomVine();
 
 
 //// Video loading and unloading ////
-function loadVideo(url) {
-	let video = $('#video')[0];
-	video.src = url;
-	video.load();
-	video.play();
+function loadVideo(url, id = '#video') {
+	let video = $(id);
+
+	video.unbind();
+
+	video[0].src = url;
+	video[0].load();
+
+	if (id === '#video') video[0].play();
+
+	video.on('click', () => {
+		if (id !== '#video') return window.location = `/v/${id.replace('#', '')}`;
+
+		if (video[0].paused) video[0].play();
+		else video[0].pause();
+	});
+
+	video.hover(
+		() => { if (video[0].paused) video[0].play() },
+		() => { if (!video[0].paused) video[0].pause() }
+	);
 }
 
 function unloadVideo() {
