@@ -41,11 +41,6 @@ Router.get('/getVine/:vineId', (req, res) => {
 });
 
 //// Pages (Full loads) ////
-/*Router.get('/v/*', (req, res) => {
-	Frontend.testIndex().then((html) => respond(res, html));
-});*/
-
-// Root index
 Router.get('/', (_req, res) => {
 	Frontend.dom('index')
 		.then((index) => respond(res, index));
