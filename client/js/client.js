@@ -64,6 +64,8 @@ function loadVideo(vine) {
 	$('#reposts').html(reposts);
 	$('#description').html(description);
 
+	$('.fa-question').hide();
+
 
 	let video = $('#video')[0];
 	video.src = videoUrl;
@@ -91,6 +93,8 @@ function loadFromAddressBar() {
 }
 
 function unloadVideo() {
+	$('.meta-data').html('');
+	$('.fa-question').show();
 	let video = $('#video')[0];
 	video.src = '';
 }
