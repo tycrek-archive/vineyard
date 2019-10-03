@@ -4,15 +4,8 @@ var moment = require('moment');
 
 // When the DOM has completed loading
 $(window).on('load', () => {
-	let video = $('#video');
-	video.on('click', () => {
-		if (video.get(0).paused) video.get(0).play();
-		else video.get(0).pause();
-	});
 	loadFromAddressBar();
 });
-
-window.onpopstate = (_event) => loadFromAddressBar();
 
 window.random = () => getRandomVine();
 
@@ -44,8 +37,7 @@ function getRandomVine() {
 	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
-			loadVine(json);
-			window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
+			window.location = `/v/${json.vineid}`;
 		});
 }
 
@@ -82,7 +74,6 @@ function loadVine(vine) {
 	let likes = nFormatter(vine.likes, 1);
 	let comments = nFormatter(vine.comments, 1);
 	let reposts = nFormatter(vine.reposts, 1);
-
 
 	// Tags
 	let description = vine.description;
