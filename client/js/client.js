@@ -28,7 +28,7 @@ function loadVideo(url, id = '#video') {
 		else video[0].pause();
 	});
 
-	video.hover(
+	if (id !== '#video') video.hover(
 		() => { if (video[0].paused) video[0].play() },
 		() => { if (!video[0].paused) video[0].pause() }
 	);
