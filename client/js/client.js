@@ -1,8 +1,8 @@
+//// NPM modules ////
 var $ = require('jquery');
 var moment = require('moment');
 
-console.log('hello');
-
+// When the DOM has completed loading
 $(window).on('load', () => {
 	let video = $('#video');
 	video.on('click', () => {
@@ -14,25 +14,58 @@ $(window).on('load', () => {
 
 window.onpopstate = (_event) => loadFromAddressBar();
 
-window.random = () => {
+window.random = () => getRandomVine();
+
+
+//// Video loading and unloading ////
+function loadVideo(url) {
+	let video = $('#video')[0];
+	video.src = url;
+	video.load();
+	video.play();
+}
+
+function unloadVideo() {
+	$('.meta-data').html('');
+	$('.fa-question').show();
+	let video = $('#video')[0];
+	video.src = '';
+}
+
+//// Vine loading and metadata manipulation ////
+function getRandomVine() {
 	let min = $('#min').val();
 	min = min === '' ? 0 : min;
+
 	unloadVideo();
+
 	fetch(`/getRandomVine/${min}`)
 		.then((res) => res.json())
 		.then((json) => {
-			loadVideo(json);
+			loadVine(json);
 			window.history.pushState({ vineId: json.vineid }, json.username, `/v/${json.vineid}`);
 		});
 }
 
-function loadVideo(vine) {
+function loadFromAddressBar() {
+	unloadVideo();
+	let path = window.location.pathname;
+	if (path.startsWith('/v/')) {
+		let split = path.split('/');
+		let vineId = split[split.length - 1];
+		fetch(`/getVine/${vineId}`)
+			.then((res) => res.json())
+			.then((json) => loadVine(json));
+	}
+}
+
+function loadVine(vine) {
 	let videoUrl = vine.videourl;
 
 	// Select username or a vanity URL
 	let name = vine.vanityurls.length === 0 ? vine.username : vine.vanityurls[0];
 	let link =
-		`<a href="/u/${name}">${vine.username}</a>`
+		`<a href="/u/${vine.useridstr}">${vine.username}</a>`
 
 	// Format the timestamp
 	let date = moment(vine.created).format('MMM Do, YYYY');
@@ -76,37 +109,14 @@ function loadVideo(vine) {
 
 	$('.fa-question').hide();
 
-
-	let video = $('#video')[0];
-	video.src = videoUrl;
-	video.load();
-	video.play();
+	loadVideo(videoUrl);
 }
 
 function entityLink(entity, original) {
-	let id = entity.vanityUrls.length === 0 ? entity.title : entity.vanityUrls[0];
+	//let id = entity.vanityUrls.length === 0 ? entity.title : entity.vanityUrls[0];
 	let link =
-		`<a href="/u/${id}">${original}</a>`;
+		`<a href="/u/${entity.idStr}">${original}</a>`;
 	return link;
-}
-
-function loadFromAddressBar() {
-	unloadVideo();
-	let path = window.location.pathname;
-	if (path.startsWith('/v/')) {
-		let split = path.split('/');
-		let vineId = split[split.length - 1];
-		fetch(`/getVine/${vineId}`)
-			.then((res) => res.json())
-			.then((json) => loadVideo(json));
-	}
-}
-
-function unloadVideo() {
-	$('.meta-data').html('');
-	$('.fa-question').show();
-	let video = $('#video')[0];
-	video.src = '';
 }
 
 function nFormatter(num, digits) {
