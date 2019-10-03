@@ -45,15 +45,21 @@ Router.get('/getVine/:vineId', (req, res) => {
 });
 
 //// Pages (Full loads) ////
-Router.get('/v/*', (req, res) => {
+/*Router.get('/v/*', (req, res) => {
 	Frontend.testIndex().then((html) => respond(res, html));
-});
+});*/
+Router.get(/(v|u|s)\/(.*)/g, (req, res) => {
+	let page = req.params[0];
+	Frontend.dom(page)
+		.then((dom) => respond(res, dom));
+})
 
 //// Pages (Partial loads) ////
 Router.get('/p/?(:page)?', (req, res) => {
 	let page = req.params.page;
-	if (page == null) respond(res, /*Frontend index*/'index');
-	else respond(res, /*Frontend.page(page)*/page);
+	if (page == null) page = 'index';
+
+	//Frontend.partial?
 });
 
 module.exports = Router;
