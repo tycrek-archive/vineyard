@@ -52,14 +52,15 @@ Router.get(/(v|u|s)\/(.*)/g, (req, res) => {
 	let page = req.params[0];
 	Frontend.dom(page)
 		.then((dom) => respond(res, dom));
-})
+});
 
 //// Pages (Partial loads) ////
-Router.get('/p/?(:page)?', (req, res) => {
-	let page = req.params.page;
-	if (page == null) page = 'index';
+Router.get('/p/?(:pageId)?', (req, res) => {
+	let pageId = req.params.pageId;
+	if (pageId == null) pageId = 'index';
 
-	//Frontend.partial?
+	Frontend.page(pageId)
+		.then((page) => respond(res, page));
 });
 
 module.exports = Router;
