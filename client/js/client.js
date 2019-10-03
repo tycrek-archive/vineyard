@@ -22,8 +22,8 @@ function unloadVideo() {
 	$('.meta-data').html('');
 	$('.fa-question').show();
 	try {
-		let video = $('#video')[0];
-		video.src = '';
+		let video = $('.video');
+		video.attr('src', '');
 	} catch { }
 }
 
