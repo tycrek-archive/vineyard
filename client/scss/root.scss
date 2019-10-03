@@ -27,6 +27,7 @@ body {
 
 #content {
 	margin: 0 10vw 0 10vw;
+	padding: 16px 0 16px 0;
 	background-color: $background;
 	@media only screen and (max-width: 768px) {
 		margin: 0 2vw 0 2vw;
@@ -38,6 +39,10 @@ body {
 
 	#video, table {
 		width: 100%;
+	}
+
+	#video {
+		margin-top: 8px;
 	}
 
 	table {
