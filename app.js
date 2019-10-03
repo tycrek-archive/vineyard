@@ -22,10 +22,11 @@ Utils.init()
  */
 function startServer(server) {
 	if (server.https) {
-		require('https').createServer({
-			key: '', // For key and cert, these values can be specific in config.json but must be passed as a data string
-			cert: '',
-		}, app).listen(server.port, () => console.log(`Server (HTTPS) hosted on: ${server.port}`))
+		let certificate = {
+			key: '',
+			cert: ''
+		};
+		require('https').createServer(certificate, app).listen(server.port, () => console.log(`Server (HTTPS) hosted on: ${server.port}`))
 	} else {
 		app.listen(server.port, () => console.log(`Server hosted on: ${server.port}`));
 	}
