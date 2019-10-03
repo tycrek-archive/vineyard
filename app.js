@@ -1,14 +1,17 @@
+// NPM modules
 var express = require('express');
 var compression = require('compression');
 
+// Local imports
 var Utils = require('./utils');
 var Router = require('./router.js');
 
+// Set up Express app
 var app = express();
-
 app.use(compression());
 app.use('/', Router);
 
+// Initialize and start the server
 Utils.init()
 	.then((server) => {
 		if (server.https) {
@@ -22,4 +25,7 @@ Utils.init()
 	})
 	.catch((err) => console.error(err));
 
+// Using module.exports lets us import the server
+// into an existing Express app, most likely using
+// the Vhost package.
 module.exports = app;
