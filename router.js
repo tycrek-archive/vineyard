@@ -2,6 +2,13 @@ var Router = require('express').Router();
 var Frontend = require('./frontend.js');
 var Psql = require('./psql');
 
+/**
+ * Sends an Express.js Response to a client
+ * @param {*} res Express.js Response object
+ * @param {String|JSON} payload Data to send to client
+ * @param {String} type HTTP response type
+ * @param {Number} status HTTP response status code
+ */
 function respond(res, payload, type = 'html', status = 200) {
 	res.status(status);
 	res.type(type);
@@ -15,15 +22,16 @@ Router.use((_req, res, next) => {
 	next();
 });
 
-
 // Client-side JavaScript compiled by Browserify
 Router.get('/js', (_req, res) => {
-	Frontend.js().then((js) => respond(res, js, 'js'));
+	Frontend.js()
+		.then((js) => respond(res, js, 'js'));
 });
 
 // SASS -> CSS compiled by node-sass
 Router.get('/css', (_req, res) => {
-	Frontend.css().then((css) => respond(res, css, 'css'));
+	Frontend.css()
+		.then((css) => respond(res, css, 'css'));
 });
 
 // Return a random Vine with at least min loops
