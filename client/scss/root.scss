@@ -1,7 +1,61 @@
+$vine-green: #55BE96;
+$vine-dark: darken($vine-green, 20%);
+$background: #F5F5F5;
+
+:root {
+	--fa-primary-color: #{$vine-green};
+	--fa-secondary-color: #{$vine-green};
+	--fa-secondary-opacity: 0.6;
+}
+
 body {
 	margin: 0;
 }
 
-#video {
-	max-width: 400px;
+#header {
+	height: 64px;
+	background-color: $vine-green;
+
+	#title {
+		font-family: 'LobsterRegular';
+		font-size: 2em;
+	}
+	@media only screen and (max-width: 768px) {
+		text-align: center;
+	}
+}
+
+#content {
+	margin: 0 10vw 0 10vw;
+	background-color: $background;
+	@media only screen and (max-width: 768px) {
+		margin: 0 2vw 0 2vw;
+	}
+}
+
+#media-player {
+	width: 400px;
+
+	#video, table {
+		width: 100%;
+	}
+
+	table {
+		table-layout: fixed;
+		text-align: center;
+	}
+
+	#description {
+		padding: 0 8px 0 8px;
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 95vw;
+		max-width: 400px;
+	}
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: $vine-green;
+	text-decoration: none;
 }

@@ -37,7 +37,10 @@ exports.css = () => {
 			})
 			.then(() => scss.join())
 			.then((fullScss) => {
-				sass.render({ data: fullScss }, resolve(fullScss));
+				sass.render({ data: fullScss }, (err, result) => {
+					if (err) throw err;
+					else resolve(result.css.toString());
+				});
 			})
 			.catch((err) => reject(err));
 	});
