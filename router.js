@@ -44,8 +44,16 @@ Router.get('/getVine/:vineId', (req, res) => {
 		.then((vine) => respond(res, vine, 'json'));
 });
 
+//// Pages (Full loads) ////
 Router.get('/v/*', (req, res) => {
 	Frontend.testIndex().then((html) => respond(res, html));
+});
+
+//// Pages (Partial loads) ////
+Router.get('/p/?(:page)?', (req, res) => {
+	let page = req.params.page;
+	if (page == null) respond(res, /*Frontend index*/'index');
+	else respond(res, /*Frontend.page(page)*/page);
 });
 
 module.exports = Router;
