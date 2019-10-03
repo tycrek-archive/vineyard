@@ -1,8 +1,10 @@
 # vineyard
 A searchable archive of videos from Vine.
 
+The latest stable-ish live version is available at [vineyard.jmoore.dev].
+
 ### To-do
 
-- [ ] Proper JavaScript history
+- [x] Proper JavaScript history
 - [ ] Tagging
 - [ ] Searching
