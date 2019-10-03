@@ -15,10 +15,6 @@ Router.use((_req, res, next) => {
 	next();
 });
 
-// Root index
-Router.get('/', (_req, res) => {
-	Frontend.testIndex().then((html) => respond(res, html));
-});
 
 // Client-side JavaScript compiled by Browserify
 Router.get('/js', (_req, res) => {
@@ -48,6 +44,13 @@ Router.get('/getVine/:vineId', (req, res) => {
 /*Router.get('/v/*', (req, res) => {
 	Frontend.testIndex().then((html) => respond(res, html));
 });*/
+
+// Root index
+Router.get('/', (_req, res) => {
+	Frontend.dom('index')
+		.then((index) => respond(res, index));
+});
+
 Router.get(/(v|u|s)\/(.*)/g, (req, res) => {
 	let page = req.params[0];
 	Frontend.dom(page)
