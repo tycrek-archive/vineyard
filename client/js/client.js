@@ -50,12 +50,17 @@ function getRandomVine() {
 function loadFromAddressBar() {
 	unloadVideo();
 	let path = window.location.pathname;
+	let split = path.split('/');
+	let parameter = split[split.length - 1];
+
 	if (path.startsWith('/v/')) {
-		let split = path.split('/');
-		let vineId = split[split.length - 1];
-		fetch(`/getVine/${vineId}`)
+		fetch(`/getVine/${parameter}`)
 			.then((res) => res.json())
 			.then((json) => loadVine(json));
+	} else if (path.startsWith('/u/')) {
+		fetch(`/getUser/${parameter}`)
+			.then((res) => res.json())
+			.then((json) => loadUser(json));
 	}
 }
 
