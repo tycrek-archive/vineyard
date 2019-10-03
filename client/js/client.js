@@ -61,10 +61,8 @@ function loadFromAddressBar() {
 function loadVine(vine) {
 	let videoUrl = vine.videourl;
 
-	// Select username or a vanity URL
-	let name = vine.vanityurls.length === 0 ? vine.username : vine.vanityurls[0];
-	let link =
-		`<a href="/u/${vine.useridstr}">${vine.username}</a>`
+	// Make the username a link
+	let link = `<a href="/u/${vine.useridstr}">${vine.username}</a>`;
 
 	// Format the timestamp
 	let date = moment(vine.created).format('MMM Do, YYYY');
