@@ -54,8 +54,8 @@ Router.get('/', (_req, res) => {
 		.then((index) => respond(res, index));
 });
 
-Router.get(/(v|u|s)\/(.*)/g, (req, res) => {
-	let page = req.params[0];
+Router.get(['/v/*', '/u/*', '/s/*'], (req, res) => {
+	let page = req.url.split('/')[1];
 	Frontend.dom(page)
 		.then((dom) => respond(res, dom));
 });
