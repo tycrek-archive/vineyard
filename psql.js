@@ -66,7 +66,8 @@ exports.search = (search) => {
 		text: `SELECT * FROM vines WHERE
 			(LOWER(description) LIKE $1) OR
 			($2 <@ tags)
-			ORDER BY loops DESC;
+			ORDER BY loops DESC
+			LIMIT 100;
 		`,
 		values: [terms, tagTerms]
 	};
