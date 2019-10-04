@@ -8,5 +8,5 @@ The latest stable-ish live version is available at [vineyard.jmoore.dev](https:/
 - [x] Proper JavaScript history
 - [ ] ~~Pages~~ *Cancelled*
 - [ ] Error handling
-- [ ] Tagging
-- [ ] Searching
+- [x] Tagging
+- [x] Searching
