@@ -63,6 +63,13 @@ Router.get('/search/:terms', (req, res) => {
 		.then((vines) => respond(res, vines, 'json'));
 });
 
+Router.get('/submitTags/:vineId/:tags', (req, res) => {
+	let vineId = req.params.vineId;
+	let tags = Utils.b642str(req.params.tags).split(',');
+	Psql.addTags(vineId, tags)
+		.then(() => respond(res, ''));
+});
+
 // Root index
 Router.get('/', (_req, res) => {
 	Frontend.dom('index')

@@ -36,6 +36,7 @@ body {
 
 #media-player {
 	width: 400px;
+	border-bottom: 1px solid silver;
 
 	#video, table {
 		width: 100%;
@@ -77,5 +78,13 @@ a {
 		margin: 8px;
 		border: 1px solid grey;
 		border-radius: 3px;
+	}
+}
+
+#tagger {
+	border-bottom: 1px solid silver;
+
+	strong {
+		font-size: 1.25em;
 	}
 }

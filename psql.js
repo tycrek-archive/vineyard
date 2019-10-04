@@ -61,9 +61,27 @@ exports.getUser = (userIdStr) => {
 
 exports.search = (search) => {
 	let terms = `%${search.split(' ').join('%')}%`.toLowerCase();
+	let tagTerms = search.toLowerCase().split(' ');
 	let q = {
-		text: 'SELECT * FROM vines WHERE LOWER(description) LIKE $1 ORDER BY loops DESC;',
-		values: [terms]
+		text: `SELECT * FROM vines WHERE
+			(LOWER(description) LIKE $1) OR
+			($2 <@ tags)
+			ORDER BY loops DESC
+			LIMIT 100;
+		`,
+		values: [terms, tagTerms]
+	};
+	return new Promise((resolve, reject) => {
+		pool.query(q)
+			.then((result) => resolve(result.rows))
+			.catch((err) => reject(err));
+	});
+}
+
+exports.addTags = (vineId, tags) => {
+	let q = {
+		text: 'UPDATE vines SET tags = ARRAY_CAT(tags, $1) WHERE vineid = $2;',
+		values: [tags, vineId]
 	};
 	return new Promise((resolve, reject) => {
 		pool.query(q)

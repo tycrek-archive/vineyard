@@ -19,6 +19,25 @@ window.search = () => {
 		.then(() => $('#loading').hide());
 };
 
+window.submitTags = () => {
+	let path = window.location.pathname;
+	let split = path.split('/');
+	let vineId = split[split.length - 1];
+
+	let tags = $('#tags').val();
+	if (tags.length == 0) return;
+
+	tags = tags.toLowerCase();
+	tags = tags.replace(/[^a-zA-Z0-9 ]/g, '');
+	tags = tags.split(' ');
+	tags = btoa(tags);
+
+	$('#tags-loading').show();
+	fetch(`/submitTags/${vineId}/${tags}`)
+		.then((res) => res.text())
+		.then(() => $('#tags-loading').hide());
+};
+
 //// Video loading and unloading ////
 function loadVideo(url, id = '#video') {
 	let video = $(id);
