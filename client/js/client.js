@@ -9,6 +9,15 @@ $(window).on('load', () => {
 
 window.random = () => getRandomVine();
 
+window.search = () => {
+	$('#loading').show();
+	$('#videos').html('');
+	let terms = btoa($('input#search').val());
+	fetch(`/search/${terms}`)
+		.then((res) => res.json())
+		.then((vines) => loadUser(vines))
+		.then(() => $('#loading').hide());
+};
 
 //// Video loading and unloading ////
 function loadVideo(url, id = '#video') {

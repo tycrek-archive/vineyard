@@ -1,6 +1,7 @@
 var Router = require('express').Router();
 var Frontend = require('./frontend.js');
 var Psql = require('./psql');
+var Utils = require('./utils');
 
 /**
  * Sends an Express.js Response to a client
@@ -55,26 +56,23 @@ Router.get('/getUser/:userIdStr', (req, res) => {
 		.then((vines) => respond(res, vines, 'json'));
 });
 
+// Search terms
+Router.get('/search/:terms', (req, res) => {
+	let terms = Utils.b642str(req.params.terms);
+	Psql.search(terms)
+		.then((vines) => respond(res, vines, 'json'));
+});
 
-//// Pages (Full loads) ////
+// Root index
 Router.get('/', (_req, res) => {
 	Frontend.dom('index')
 		.then((index) => respond(res, index));
 });
 
-Router.get(['/v/*', '/u/*', '/s/*'], (req, res) => {
+Router.get(['/v/*', '/u/*', '/s(/*)?'], (req, res) => {
 	let page = req.url.split('/')[1];
 	Frontend.dom(page)
 		.then((dom) => respond(res, dom));
-});
-
-//// Pages (Partial loads) ////
-Router.get('/p/?(:pageId)?', (req, res) => {
-	let pageId = req.params.pageId;
-	if (pageId == null) pageId = 'index';
-
-	Frontend.page(pageId)
-		.then((page) => respond(res, page));
 });
 
 module.exports = Router;

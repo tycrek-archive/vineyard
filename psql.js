@@ -60,14 +60,14 @@ exports.getUser = (userIdStr) => {
 }
 
 exports.search = (search) => {
-	let terms = search.split(' ').join('%');
+	let terms = `%${search.split(' ').join('%')}%`.toLowerCase();
 	let q = {
-		text: 'SELECT * FROM vines WHERE LOWER(description) LIKE LOWER($1);',
+		text: 'SELECT * FROM vines WHERE LOWER(description) LIKE $1 ORDER BY loops DESC;',
 		values: [terms]
 	};
 	return new Promise((resolve, reject) => {
 		pool.query(q)
-			.then((result) => resolve(result.row))
+			.then((result) => resolve(result.rows))
 			.catch((err) => reject(err));
 	});
 }
