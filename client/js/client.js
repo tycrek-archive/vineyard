@@ -83,7 +83,7 @@ function loadFromAddressBar() {
 	} else if (path.startsWith('/u/')) {
 		fetch(`/getUser/${parameter}`)
 			.then((res) => res.json())
-			.then((json) => loadUser(json));
+			.then((json) => loadUser(json, true));
 	}
 }
 
@@ -137,7 +137,8 @@ function loadVine(vine) {
 	loadVideo(videoUrl);
 }
 
-function loadUser(vines) {
+function loadUser(vines, isUser) {
+	if (isUser) $('#username').html(vines[0].username);
 	vines.forEach((vine) => {
 		let id = vine.vineid;
 		let jid = `#${id}`;
